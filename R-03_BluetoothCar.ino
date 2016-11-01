@@ -24,16 +24,24 @@ int inL2 = 6;
 
 NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
 
+#define MAX_SPEED 255
+#define DANGER_DISTANCE 20 // cm
+
 // led
 int ledPin = 12;
 
-#define DANGER_DISTANCE 20 // cm
+// speed (case 'q' at the beginning)
+int speed = MAX_SPEED;
 
 void setup()
 {
   bluetooth.begin(115200);  // The Bluetooth Mate defaults to 115200bps
   delay(100);  // Short delay, wait for the Mate to send back CMD
   bluetooth.begin(9600);  // Start bluetooth serial at 9600
+
+  // Hardware serial port for debugging
+  // signals from smart phone
+  Serial.begin(9600);
 
   pinMode(eR, OUTPUT);
   pinMode(inR1, OUTPUT);
@@ -49,12 +57,14 @@ void setup()
 
 void loop()
 {
-  int speed = 255;
   int distance = sonar.ping_cm();
 
   // If the bluetooth sent any characters
   if (bluetooth.available()) {
     dataFromBt = bluetooth.read();
+
+    // Log out the signals from smartphone
+    Serial.println((char) dataFromBt);
 
     switch(dataFromBt) {
       // foward
@@ -88,6 +98,14 @@ void loop()
       case 'S': case 's':
         setMotorR(0, 0);
         setMotorL(0, 0);
+        break;
+      // velocity
+      case '1': case '2': case '3': case '4': case '5':
+      case '6': case '7': case '8': case '9': case '0':
+        speed = MAX_SPEED - (10 - dataFromBt) * 10;
+        break;
+      case 'q':
+        speed = MAX_SPEED;
         break;
     }
   }
