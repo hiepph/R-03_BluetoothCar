@@ -31,7 +31,8 @@ NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and
 int ledPin = 12;
 
 // speed (case '0' at the beginning)
-int speed = MAX_SPEED - 100;
+int speed = MAX_SPEED - 50;
+int speedLevel;
 
 void setup()
 {
@@ -103,7 +104,7 @@ void loop()
       case '1': case '2': case '3': case '4': case '5':
       case '6': case '7': case '8': case '9': case '0':
         speedLevel = dataFromBt - '0';
-        speed = MAX_SPEED - (10 - speedLevel) * 10;
+        speed = MAX_SPEED - (10 - speedLevel) * 5;
         break;
       case 'q':
         speed = MAX_SPEED;
