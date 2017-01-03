@@ -1,15 +1,19 @@
-# R-03: Bluetooth Car
+# R3: Bluetooth Car
+
 + Front view
 ![Front](http://i.imgur.com/NBddUQT.jpg)
+
 + Rear view
 ![Rear](http://i.imgur.com/unKXwrM.jpg)
 
 ## Overview
+
 Car model that can be controlled by Android phone/tablet through bluetooth.
 
 \* Android app to control car: [Arduino Bluetooth RC Car](https://play.google.com/store/apps/details?id=braulio.calle.bluetoothRCcontroller&hl=en) by Andi.Co.
 
 ## How it works
+
 ![How it works](http://i.imgur.com/X79LGXI.jpg)
 
 Android phone/tablet connects to __Arduino Nano__ with the help of __Bluetooth
@@ -24,4 +28,5 @@ object like wall (you can't go foward if too-close).
 ![Core board](http://i.imgur.com/Hb8BgPM.jpg)
 
 ## Code
+
 Just use Arduino IDE upload __R-03_BluetoothCar.ino__ to your car's arduino.
